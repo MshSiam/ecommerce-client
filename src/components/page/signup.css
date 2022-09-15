@@ -1,0 +1,19 @@
+.signup__image--container {
+  background-image: url(https://img.freepik.com/free-vector/sign-up-concept-illustration_114360-7885.jpg?w=2000);
+  height: 100vh;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+.signup__form--container {
+  margin-top: 90px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+}
+
+@media screen and (max-width: 756px) {
+  .signup__image--container {
+    display: none;
+  }
+}
