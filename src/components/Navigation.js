@@ -1,9 +1,17 @@
 import React from "react"
-import { Container, Nav, Navbar, NavDropdown } from "react-bootstrap"
+import { Button, Container, Nav, Navbar, NavDropdown } from "react-bootstrap"
+import { useDispatch, useSelector } from "react-redux"
 import { LinkContainer } from "react-router-bootstrap"
+import { logout } from "../redux/features/userSlice"
 import "./navigation.css"
 
 const Navigation = () => {
+  const dispatch = useDispatch()
+  const handleLogOut = () => {
+    dispatch(logout())
+  }
+
+  const user = useSelector((state) => state.user)
   return (
     <Navbar>
       <Container>
@@ -13,20 +21,57 @@ const Navigation = () => {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ms-auto">
-            <Nav.Link href="/">Home</Nav.Link>
-            <Nav.Link href="/login">Login</Nav.Link>
-            <Nav.Link href="/signup">Signup</Nav.Link>
-            <NavDropdown title="Dropdown" id="basic-nav-dropdown">
-              <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.2">
-                Another action
-              </NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
-              <NavDropdown.Divider />
-              <NavDropdown.Item href="#action/3.4">
-                Separated link
-              </NavDropdown.Item>
-            </NavDropdown>
+            {!user && (
+              <>
+                <LinkContainer to="/login">
+                  <Nav.Link>Login</Nav.Link>
+                </LinkContainer>
+                <LinkContainer to="/signup">
+                  <Nav.Link>Signup</Nav.Link>
+                </LinkContainer>
+              </>
+            )}
+
+            {user && (
+              <NavDropdown title={`${user.email}`} id="basic-nav-dropdown">
+                {user.isAdmin && (
+                  <>
+                    <LinkContainer to="/dashboard">
+                      <NavDropdown.Item>Dashboard</NavDropdown.Item>
+                    </LinkContainer>
+
+                    <LinkContainer to="/createProduct">
+                      <NavDropdown.Item>Create Product</NavDropdown.Item>
+                    </LinkContainer>
+
+                    <LinkContainer to="/manageProduct">
+                      <NavDropdown.Item>Manage Product</NavDropdown.Item>
+                    </LinkContainer>
+
+                    <LinkContainer to="/manageOrders">
+                      <NavDropdown.Item>Manage Orders</NavDropdown.Item>
+                    </LinkContainer>
+
+                    <LinkContainer to="/manageUsers">
+                      <NavDropdown.Item>Manage Users</NavDropdown.Item>
+                    </LinkContainer>
+                  </>
+                )}
+                <LinkContainer to="/orders">
+                  <NavDropdown.Item>My Orders</NavDropdown.Item>
+                </LinkContainer>
+                <LinkContainer to="/cart">
+                  <NavDropdown.Item>Cart</NavDropdown.Item>
+                </LinkContainer>
+                <NavDropdown.Divider />
+                <Button
+                  variant="danger"
+                  onClick={handleLogOut}
+                  className="logout-btn mx-5">
+                  Logout
+                </Button>
+              </NavDropdown>
+            )}
           </Nav>
         </Navbar.Collapse>
       </Container>
