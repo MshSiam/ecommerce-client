@@ -1,0 +1,20 @@
+#cartCount {
+  font-size: 10px;
+  background-color: red;
+  color: aliceblue;
+  padding: 2px 4px;
+  vertical-align: top;
+  margin-left: -8px;
+  border-radius: 50%;
+  margin-top: -5px;
+}
+
+.badeg {
+  padding-left: 9px;
+  padding-right: 9px;
+  border-radius: 9px;
+}
+
+.fa-shopping-cart {
+  font-size: 20px;
+}

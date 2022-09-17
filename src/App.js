@@ -10,6 +10,7 @@ import NewProduct from "./components/page/NewProduct"
 import ProductPage from "./components/page/ProductPage"
 import Category from "./components/page/Category"
 import ScrollToTop from "./components/ScrollToTop"
+import CartPage from "./components/page/CartPage"
 
 function App() {
   const user = useSelector((state) => state.user)
@@ -19,12 +20,6 @@ function App() {
         <ScrollToTop />
         <Navigation />
         <Routes>
-          <Route index element={<Home />} />
-          <Route path="*" element={<Home />} />
-          <Route path="/createProduct" element={<NewProduct />} />
-          <Route path="/product/:id" element={<ProductPage />} />
-          <Route path="/category/:category" element={<Category />} />
-
           {!user && (
             <>
               {" "}
@@ -32,6 +27,23 @@ function App() {
               <Route path="/signup" element={<Signup />} />
             </>
           )}
+
+          {user && !user.isAdmin && (
+            <>
+              {" "}
+              <Route path="/cart" element={<CartPage />} />
+            </>
+          )}
+
+          {user && user.isAdmin && (
+            <>
+              <Route path="/createProduct" element={<NewProduct />} />
+            </>
+          )}
+          <Route index element={<Home />} />
+          <Route path="*" element={<Home />} />
+          <Route path="/product/:id" element={<ProductPage />} />
+          <Route path="/category/:category" element={<Category />} />
         </Routes>
       </BrowserRouter>
     </div>

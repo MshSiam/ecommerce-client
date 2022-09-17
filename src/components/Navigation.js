@@ -31,9 +31,29 @@ const Navigation = () => {
                 </LinkContainer>
               </>
             )}
+            {user && !user.isAdmin && (
+              <>
+                <LinkContainer to="/cart">
+                  <Nav.Link>
+                    <i className="fas fa-shopping-cart"></i>
+                    {user?.cart.count > 0 ? (
+                      <span className="badge badge-warning" id="cartCount">
+                        {user.cart.count}
+                      </span>
+                    ) : (
+                      <span className="badge badge-warning" id="cartCount">
+                        0
+                      </span>
+                    )}
+                  </Nav.Link>
+                </LinkContainer>
+              </>
+            )}
 
             {user && (
-              <NavDropdown title={`${user.email}`} id="basic-nav-dropdown">
+              <NavDropdown
+                title={`${user.name.toUpperCase()}`}
+                id="basic-nav-dropdown">
                 {user.isAdmin && (
                   <>
                     <LinkContainer to="/dashboard">
@@ -57,12 +77,18 @@ const Navigation = () => {
                     </LinkContainer>
                   </>
                 )}
-                <LinkContainer to="/orders">
-                  <NavDropdown.Item>My Orders</NavDropdown.Item>
-                </LinkContainer>
-                <LinkContainer to="/cart">
-                  <NavDropdown.Item>Cart</NavDropdown.Item>
-                </LinkContainer>
+
+                {user && !user.isAdmin && (
+                  <>
+                    <LinkContainer to="/orders">
+                      <NavDropdown.Item>My Orders</NavDropdown.Item>
+                    </LinkContainer>
+                    <LinkContainer to="/cart">
+                      <NavDropdown.Item>Cart</NavDropdown.Item>
+                    </LinkContainer>
+                  </>
+                )}
+
                 <NavDropdown.Divider />
                 <Button
                   variant="danger"
