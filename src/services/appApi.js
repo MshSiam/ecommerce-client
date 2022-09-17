@@ -38,18 +38,20 @@ export const appApi = createApi({
     removeFromCart: builder.mutation({
       query: (body) => ({
         url: "/products/remove-from-cart",
-        body: body,
-        method: "DELETE"
-      })
-    }),
-    // remove from cart
-    increaseCartProduct: builder.mutation({
-      query: (body) => ({
-        url: "/products/increase-cart",
-        body: body,
+        body,
         method: "POST"
       })
     }),
+
+    // increase cart
+    increaseCartProduct: builder.mutation({
+      query: (body) => ({
+        url: "/products/increase-cart",
+        body,
+        method: "POST"
+      })
+    }),
+
     // remove from cart
     decreaseCartProducts: builder.mutation({
       query: (body) => ({
