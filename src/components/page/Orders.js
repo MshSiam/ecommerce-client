@@ -41,7 +41,7 @@ const Orders = () => {
       <Table responsive striped bordered hover>
         <thead>
           <tr>
-            <th>#</th>
+            <th>Product Id</th>
             <th>Status</th>
             <th>Date</th>
             <th>Total</th>

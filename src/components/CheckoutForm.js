@@ -47,7 +47,7 @@ const CheckoutForm = () => {
             setAlertMessage(`Payment ${paymentIntent.status}`)
             setTimeout(() => {
               navigate("/orders")
-            }, 3000)
+            }, 2000)
           }
         }
       )

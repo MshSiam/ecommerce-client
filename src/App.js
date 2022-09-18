@@ -12,6 +12,7 @@ import Category from "./components/page/Category"
 import ScrollToTop from "./components/ScrollToTop"
 import CartPage from "./components/page/CartPage"
 import Orders from "./components/page/Orders"
+import AdminDashboard from "./components/page/AdminDashboard"
 
 function App() {
   const user = useSelector((state) => state.user)
@@ -40,6 +41,7 @@ function App() {
           {user && user.isAdmin && (
             <>
               <Route path="/createProduct" element={<NewProduct />} />
+              <Route path="/dashboard" element={<AdminDashboard />} />
             </>
           )}
           <Route index element={<Home />} />
