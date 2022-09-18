@@ -1,6 +1,6 @@
 import React from "react"
 import { useEffect } from "react"
-import { Col, Row } from "react-bootstrap"
+import { Col, Container, Row } from "react-bootstrap"
 import { LinkContainer } from "react-router-bootstrap"
 import { Link } from "react-router-dom"
 import categories from "../../categories"
@@ -27,11 +27,13 @@ const Home = () => {
       <div className="featured-products-container container mt-4">
         <h2>Last Products</h2>
         {/* last product from backend */}
-        <div className="d-flex justify-content-center">
-          {lastProducts.map((product) => (
-            <ProductPreview {...product} key={product._id} />
-          ))}
-        </div>
+        <Container className="d-flex justify-content-center">
+          <Row>
+            {lastProducts.map((product) => (
+              <ProductPreview {...product} key={product._id} />
+            ))}
+          </Row>
+        </Container>
         <div>
           <Link
             style={{

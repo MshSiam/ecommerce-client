@@ -1,13 +1,12 @@
-import React from "react"
-import { useState } from "react"
-import { Alert, Button, Col, Container, Form, Row } from "react-bootstrap"
-import { Link } from "react-router-dom"
-import { useNavigate } from "react-router-dom"
-import { useCreateProductMutation } from "../../services/appApi"
-import "./newproduct.css"
+import React, { useEffect, useState } from "react"
+import { Alert, Col, Container, Form, Row, Button } from "react-bootstrap"
+import { useNavigate, useParams } from "react-router-dom"
 import axios from "../../axios"
+import { useUpdateProductMutation } from "../../services/appApi"
+import "./newproduct.css"
 
-const NewProduct = () => {
+function EditProductPage() {
+  const { id } = useParams()
   const [name, setName] = useState("")
   const [description, setDescription] = useState("")
   const [price, setPrice] = useState("")
@@ -15,8 +14,22 @@ const NewProduct = () => {
   const [images, setImages] = useState([])
   const [imgToRemove, setImgToRemove] = useState(null)
   const navigate = useNavigate()
-  const [createProduct, { isError, error, isLoading, isSuccess }] =
-    useCreateProductMutation()
+  const [updateProduct, { isError, error, isLoading, isSuccess }] =
+    useUpdateProductMutation()
+
+  useEffect(() => {
+    axios
+      .get("/products/" + id)
+      .then(({ data }) => {
+        const product = data.product
+        setName(product.name)
+        setDescription(product.description)
+        setCategory(product.category)
+        setImages(product.pictures)
+        setPrice(product.price)
+      })
+      .catch((e) => console.log(e))
+  }, [id])
 
   function handleRemoveImg(imgObj) {
     setImgToRemove(imgObj.public_id)
@@ -36,9 +49,12 @@ const NewProduct = () => {
     if (!name || !description || !price || !category || !images.length) {
       return alert("Please fill out all the fields")
     }
-    createProduct({ name, description, price, category, images }).then(
+    updateProduct({ id, name, description, price, category, images }).then(
       ({ data }) => {
         if (data.length > 0) {
+          setTimeout(() => {
+            navigate("/")
+          }, 1500)
         }
       }
     )
@@ -67,10 +83,8 @@ const NewProduct = () => {
       <Row>
         <Col md={6} className="new-product__form--container">
           <Form style={{ width: "100%" }} onSubmit={handleSubmit}>
-            <h1 className="mt-4">Create a product</h1>
-            {isSuccess && (
-              <Alert variant="success">Product created with succcess</Alert>
-            )}
+            <h1 className="mt-4">Edit product</h1>
+            {isSuccess && <Alert variant="success">Product updated</Alert>}
             {isError && <Alert variant="danger">{error.data}</Alert>}
             <Form.Group className="mb-3">
               <Form.Label>Product name</Form.Label>
@@ -110,7 +124,7 @@ const NewProduct = () => {
               className="mb-3"
               onChange={(e) => setCategory(e.target.value)}>
               <Form.Label>Category</Form.Label>
-              <Form.Select>
+              <Form.Select value={category}>
                 <option disabled selected>
                   -- Select One --
                 </option>
@@ -144,7 +158,7 @@ const NewProduct = () => {
 
             <Form.Group>
               <Button type="submit" disabled={isLoading || isSuccess}>
-                Create Product
+                Update Product
               </Button>
             </Form.Group>
           </Form>
@@ -155,4 +169,4 @@ const NewProduct = () => {
   )
 }
 
-export default NewProduct
+export default EditProductPage
