@@ -1,3 +1,5 @@
+import { Elements } from "@stripe/react-stripe-js"
+import { loadStripe } from "@stripe/stripe-js"
 import React from "react"
 import { Alert, Col, Container, Row, Table } from "react-bootstrap"
 import { useSelector } from "react-redux"
@@ -6,7 +8,12 @@ import {
   useDecreaseCartProductsMutation,
   useIncreaseCartProductMutation
 } from "../../services/appApi"
+import CheckoutForm from "../CheckoutForm"
 import "./cartPage.css"
+
+const stripePromise = loadStripe(
+  "pk_test_51Jw8ADFim1hcZrYeqMFawvRbNlv80q1OLCTXoepNPwjdEUJ2xVEtAbMJM4ySMhZO6PIiVuAZh0kIO4VQc4kdKQgt003VbI7f3F"
+)
 
 const CartPage = () => {
   const user = useSelector((state) => state.user)
@@ -29,11 +36,13 @@ const CartPage = () => {
       <Row>
         <h1 className="pt-2 mb-4 h3">Shopping Cart</h1>
 
-        <Col md={5}>
+        <Col>
           {cart.length === 0 ? (
             <Alert variant="info">Shopping Cart Is Empty</Alert>
           ) : (
-            <div>Payment</div>
+            <Elements stripe={stripePromise}>
+              <CheckoutForm />
+            </Elements>
           )}
         </Col>
         <Col md={7}>

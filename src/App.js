@@ -11,6 +11,7 @@ import ProductPage from "./components/page/ProductPage"
 import Category from "./components/page/Category"
 import ScrollToTop from "./components/ScrollToTop"
 import CartPage from "./components/page/CartPage"
+import Orders from "./components/page/Orders"
 
 function App() {
   const user = useSelector((state) => state.user)
@@ -32,6 +33,7 @@ function App() {
             <>
               {" "}
               <Route path="/cart" element={<CartPage />} />
+              <Route path="/orders" element={<Orders />} />
             </>
           )}
 
