@@ -14,6 +14,7 @@ import CartPage from "./components/page/CartPage"
 import Orders from "./components/page/Orders"
 import AdminDashboard from "./components/page/AdminDashboard"
 import EditProductPage from "./components/page/EditProductPage"
+import OrdersAdminPage from "./components/page/OrdersAdminPage"
 
 function App() {
   const user = useSelector((state) => state.user)
@@ -44,6 +45,7 @@ function App() {
               <Route path="/createProduct" element={<NewProduct />} />
               <Route path="/dashboard" element={<AdminDashboard />} />
               <Route path="/product/:id/edit" element={<EditProductPage />} />
+              <Route path="/manageOrders" element={<OrdersAdminPage />} />
             </>
           )}
           <Route index element={<Home />} />
