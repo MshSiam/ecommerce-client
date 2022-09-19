@@ -1,7 +1,7 @@
 import axios from "axios"
 
 const instence = axios.create({
-  baseURL: "http://localhost:5000"
+  baseURL: "https://shrouded-hollows-96088.herokuapp.com"
 })
 
 export default instence

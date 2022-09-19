@@ -21,38 +21,6 @@ const Navigation = () => {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ms-auto">
-            <LinkContainer className="bg-info rounded" to="/allProducts">
-              <Nav.Link>All Products</Nav.Link>
-            </LinkContainer>
-            {!user && (
-              <>
-                <LinkContainer to="/login">
-                  <Nav.Link>Login</Nav.Link>
-                </LinkContainer>
-                <LinkContainer to="/signup">
-                  <Nav.Link>Signup</Nav.Link>
-                </LinkContainer>
-              </>
-            )}
-            {user && !user.isAdmin && (
-              <>
-                <LinkContainer to="/cart">
-                  <Nav.Link>
-                    <i className="fas fa-shopping-cart"></i>
-                    {user?.cart.count > 0 ? (
-                      <span className="badge badge-warning" id="cartCount">
-                        {user.cart.count}
-                      </span>
-                    ) : (
-                      <span className="badge badge-warning" id="cartCount">
-                        0
-                      </span>
-                    )}
-                  </Nav.Link>
-                </LinkContainer>
-              </>
-            )}
-
             {user && (
               <NavDropdown
                 title={`${user.name.toUpperCase()}`}
@@ -100,6 +68,39 @@ const Navigation = () => {
                   Logout
                 </Button>
               </NavDropdown>
+            )}
+            <LinkContainer className="bg-info rounded" to="/allProducts">
+              <Nav.Link>All Products</Nav.Link>
+            </LinkContainer>
+
+            {!user && (
+              <>
+                <LinkContainer to="/login">
+                  <Nav.Link>Login</Nav.Link>
+                </LinkContainer>
+                <LinkContainer to="/signup">
+                  <Nav.Link>Signup</Nav.Link>
+                </LinkContainer>
+              </>
+            )}
+
+            {user && !user.isAdmin && (
+              <>
+                <LinkContainer to="/cart">
+                  <Nav.Link>
+                    <i className="fas fa-shopping-cart"></i>
+                    {user?.cart.count > 0 ? (
+                      <span className="badge badge-warning" id="cartCount">
+                        {user.cart.count}
+                      </span>
+                    ) : (
+                      <span className="badge badge-warning" id="cartCount">
+                        0
+                      </span>
+                    )}
+                  </Nav.Link>
+                </LinkContainer>
+              </>
             )}
           </Nav>
         </Navbar.Collapse>
