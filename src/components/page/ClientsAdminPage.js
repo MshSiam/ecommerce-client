@@ -30,7 +30,8 @@ const ClientsAdminPage = () => {
   }
 
   return (
-    <div>
+    <div className="my-5" style={{ minHeight: "50vh" }}>
+      <h3 className="bg-info py-4 my-5 rounded">All Orders</h3>
       <Table responsive striped bordered hover>
         <thead>
           <tr>

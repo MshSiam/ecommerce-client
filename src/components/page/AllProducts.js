@@ -55,17 +55,6 @@ const AllProducts = () => {
             ))}
           </Row>
         </Container>
-        <div>
-          <Link
-            style={{
-              textAlign: "right",
-              display: "block",
-              textDecoration: "none"
-            }}
-            to="/category/all">
-            See more {">>"}
-          </Link>
-        </div>
       </div>
     </Container>
   )

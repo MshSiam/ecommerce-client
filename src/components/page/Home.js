@@ -34,7 +34,7 @@ const Home = () => {
               .map((product) => (
                 <ProductPreview {...product} key={product._id} />
               ))
-              .slice(0, 9)}
+              .slice(0, 10)}
           </Row>
         </Container>
         <div>

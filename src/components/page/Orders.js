@@ -36,7 +36,7 @@ const Orders = () => {
   }
 
   return (
-    <Container>
+    <Container style={{ minHeight: "50vh" }}>
       <h1 className="text-center">Your orders</h1>
       <Table responsive striped bordered hover>
         <thead>

@@ -11,7 +11,7 @@ export default function App() {
   return (
     <MDBFooter
       bgColor="light"
-      className="text-center text-lg-start text-muted my-5">
+      className="text-center text-lg-start text-muted mt-5">
       <section className="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
         <div className="me-5 d-none d-lg-block">
           <h4> Social Links</h4>
