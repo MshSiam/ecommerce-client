@@ -2,6 +2,7 @@ import React from "react"
 import { Col, Container, Nav, Row, Tab } from "react-bootstrap"
 import DashboardProducts from "../DashboardProducts"
 import "./adminDashboard.css"
+import ClientsAdminPage from "./ClientsAdminPage"
 import OrdersAdminPage from "./OrdersAdminPage"
 
 const AdminDashboard = () => {
@@ -29,6 +30,9 @@ const AdminDashboard = () => {
               </Tab.Pane>
               <Tab.Pane eventKey="manageOrders">
                 <OrdersAdminPage />
+              </Tab.Pane>
+              <Tab.Pane eventKey="clients">
+                <ClientsAdminPage />
               </Tab.Pane>
             </Tab.Content>
           </Col>

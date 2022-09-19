@@ -10,7 +10,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { updateProducts } from "../../redux/features/productSlice"
 import ProductPreview from "../ProductPreview"
 
-const Home = () => {
+const AllProducts = () => {
   const dispatch = useDispatch()
   const products = useSelector((state) => state.products)
   const lastProducts = products.slice(0, 8)
@@ -20,45 +20,10 @@ const Home = () => {
   }, [])
   return (
     <Container fluid>
-      <img
-        src="https://res.cloudinary.com/learn-code-10/image/upload/v1653947013/yqajnhqf7usk56zkwqi5.png "
-        alt=""
-        className="img-fluid"
-      />
-      <div className="featured-products-container container mt-4">
-        <h2>Last Products</h2>
-        {/* last product from backend */}
-        <Container className="d-flex justify-content-center">
-          <Row>
-            {lastProducts
-              .map((product) => (
-                <ProductPreview {...product} key={product._id} />
-              ))
-              .slice(0, 9)}
-          </Row>
-        </Container>
-        <div>
-          <Link
-            style={{
-              textAlign: "right",
-              display: "block",
-              textDecoration: "none"
-            }}
-            to="/category/all">
-            See more {">>"}
-          </Link>
-        </div>
-      </div>
-      {/* banner */}
-      <Container fluid className="sale__banner--container mt-4">
-        <img
-          src="https://res.cloudinary.com/learn-code-10/image/upload/v1654093280/xkia6f13xxlk5xvvb5ed.png"
-          alt=""
-          className="img-fluid"
-        />
-      </Container>
-      <div className="recent-products-container container mt-4">
-        <h2>Categories</h2>
+      <div className="recent-products-container container my-5">
+        <h2 className="bg-info p-5 text-secondary rounded">
+          View Product According To Categories
+        </h2>
         <Row>
           {categories.map((category) => (
             <LinkContainer
@@ -77,8 +42,33 @@ const Home = () => {
           ))}
         </Row>
       </div>
+
+      <div className="featured-products-container container my-4">
+        <h2 className="my-4 bg-secondary p-5 text-white rounded">
+          All Products
+        </h2>
+        {/* All product from backend */}
+        <Container className="d-flex justify-content-center">
+          <Row>
+            {lastProducts.map((product) => (
+              <ProductPreview {...product} key={product._id} />
+            ))}
+          </Row>
+        </Container>
+        <div>
+          <Link
+            style={{
+              textAlign: "right",
+              display: "block",
+              textDecoration: "none"
+            }}
+            to="/category/all">
+            See more {">>"}
+          </Link>
+        </div>
+      </div>
     </Container>
   )
 }
 
-export default Home
+export default AllProducts

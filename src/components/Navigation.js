@@ -21,6 +21,9 @@ const Navigation = () => {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ms-auto">
+            <LinkContainer className="bg-info rounded" to="/allProducts">
+              <Nav.Link>All Products</Nav.Link>
+            </LinkContainer>
             {!user && (
               <>
                 <LinkContainer to="/login">

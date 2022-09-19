@@ -15,6 +15,9 @@ import Orders from "./components/page/Orders"
 import AdminDashboard from "./components/page/AdminDashboard"
 import EditProductPage from "./components/page/EditProductPage"
 import OrdersAdminPage from "./components/page/OrdersAdminPage"
+import Footer from "../src/components/Footer"
+import ClientsAdminPage from "./components/page/ClientsAdminPage"
+import AllProducts from "./components/page/AllProducts"
 
 function App() {
   const user = useSelector((state) => state.user)
@@ -46,13 +49,16 @@ function App() {
               <Route path="/dashboard" element={<AdminDashboard />} />
               <Route path="/product/:id/edit" element={<EditProductPage />} />
               <Route path="/manageOrders" element={<OrdersAdminPage />} />
+              <Route path="/manageUsers" element={<ClientsAdminPage />} />
             </>
           )}
           <Route index element={<Home />} />
           <Route path="*" element={<Home />} />
+          <Route path="/allProducts" element={<AllProducts />} />
           <Route path="/product/:id" element={<ProductPage />} />
           <Route path="/category/:category" element={<Category />} />
         </Routes>
+        <Footer />
       </BrowserRouter>
     </div>
   )

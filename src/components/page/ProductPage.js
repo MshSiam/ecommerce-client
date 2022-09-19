@@ -13,7 +13,7 @@ import {
   Row
 } from "react-bootstrap"
 import { useSelector } from "react-redux"
-import { useParams } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 import Loading from "../Loading"
 import SimilarProducts from "../SimilarProducts"
 import "./productPage.css"
@@ -21,11 +21,12 @@ import { LinkContainer } from "react-router-bootstrap"
 import "react-alice-carousel/lib/alice-carousel.css"
 import { useAddToCartMutation } from "../../services/appApi"
 import ToastMessage from "../ToastMessage"
+import { Link } from "react-router-dom"
 
 const ProductPage = () => {
   const { id } = useParams()
   const user = useSelector((state) => state.user)
-
+  const nevigate = useNavigate()
   const [product, setProduct] = useState(null)
   const [similar, setSimilar] = useState(null)
 
@@ -69,70 +70,104 @@ const ProductPage = () => {
     ))
   }
 
+  // if (!user) {
+  //   nevigate("/login")
+  // }
+
   return (
     <Container className="pt-4" style={{ position: "relative" }}>
       <Row>
-        <Col lg={6}>
-          <AliceCarousel
-            mouseTracking
-            items={images}
-            controlsStrategy="alternate"
-          />
-        </Col>
-        <Col lg={6} className="pt-4 mt-4" style={{ textAlign: "center" }}>
-          <h1>{product.name}</h1>
-          <p>
-            Category : <Badge bg="warning">{product.category}</Badge>
-          </p>
+        {user ? (
+          <>
+            <Col lg={6}>
+              <AliceCarousel
+                mouseTracking
+                items={images}
+                controlsStrategy="alternate"
+              />
+            </Col>
+            <Col lg={6} className="pt-4 mt-4" style={{ textAlign: "center" }}>
+              <h1>{product.name}</h1>
+              <p>
+                Category : <Badge bg="warning">{product.category}</Badge>
+              </p>
 
-          <h3>
-            Price : <strong> ${product.price}</strong>
-          </h3>
-          <p style={{ textAlign: "right" }} className="py-3">
-            <strong>Description : </strong>
-            {product.description}
-          </p>
-          {user && !user.isAdmin && (
-            <ButtonGroup style={{ width: "90%" }}>
-              <Form.Select
-                size="lg"
-                style={{ width: "40%", borderRadius: "0" }}>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-              </Form.Select>
-              <Button
-                size="lg"
-                className="btn-secondary"
-                onClick={(e) =>
-                  addToCart({
-                    userId: user._id,
-                    productId: id,
-                    price: product.price,
-                    image: product.pictures[0].url
-                  })
-                }>
-                Add to Cart
-              </Button>
-            </ButtonGroup>
-          )}
+              <h3>
+                Price : <strong> ${product.price}</strong>
+              </h3>
+              <p style={{ textAlign: "right" }} className="py-3">
+                <strong>Description : </strong>
+                {product.description}
+              </p>
+              {user && !user.isAdmin && (
+                <ButtonGroup style={{ width: "90%" }}>
+                  <Form.Select
+                    size="lg"
+                    style={{ width: "40%", borderRadius: "0" }}>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                  </Form.Select>
+                  <Button
+                    size="lg"
+                    className="btn-secondary"
+                    onClick={(e) =>
+                      addToCart({
+                        userId: user._id,
+                        productId: id,
+                        price: product.price,
+                        image: product.pictures[0].url
+                      })
+                    }>
+                    Add to Cart
+                  </Button>
+                </ButtonGroup>
+              )}
 
-          {user.isAdmin && (
-            <LinkContainer to={`/product/${product._id}/edit`}>
-              <Button size="lg" className="btn-danger">
-                Edit Product
-              </Button>
-            </LinkContainer>
-          )}
-          {isSuccess && (
-            <ToastMessage
-              title="Successfully Added"
-              bg="warning"
-              body={`${product.name} is in your cart`}
-            />
-          )}
-        </Col>
+              {user.isAdmin && (
+                <LinkContainer to={`/product/${product._id}/edit`}>
+                  <Button size="lg" className="btn-danger">
+                    Edit Product
+                  </Button>
+                </LinkContainer>
+              )}
+              {isSuccess && (
+                <ToastMessage
+                  title="Successfully Added"
+                  bg="warning"
+                  body={`${product.name} is in your cart`}
+                />
+              )}
+            </Col>
+          </>
+        ) : (
+          <>
+            <Col lg={6}>
+              <AliceCarousel
+                mouseTracking
+                items={images}
+                controlsStrategy="alternate"
+              />
+            </Col>
+            <Col lg={6} className="pt-4 mt-4" style={{ textAlign: "center" }}>
+              <h1>{product.name}</h1>
+              <p>
+                Category : <Badge bg="warning">{product.category}</Badge>
+              </p>
+              <h3>
+                Price : <strong> ${product.price}</strong>
+              </h3>
+              <p style={{ textAlign: "right" }} className="py-3">
+                <strong>Description : </strong>
+                {product.description}
+              </p>
+              <Link to="/login" className="btn btn-secondary">
+                Login to Purchase
+              </Link>
+            </Col>
+          </>
+        )}
       </Row>
 
       <div className="my-4">
