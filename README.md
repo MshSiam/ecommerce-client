@@ -7,7 +7,7 @@ This is fullstack web application using react js, react-bootstrap , node, mongod
 
 ## Features
 
-- Fully Responsive 
+- This website is fully Responsive desktop, tablet and mobile devices. 
 - Different nav for users and admin. 
 - User have to login or sign up to purchase proucts.
 - User can see his order details, increase, decrease or delete products from the cart.
