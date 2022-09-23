@@ -10,8 +10,8 @@ This is fullstack web application using react js, react-bootstrap , node, mongod
 - Fully Responsive 
 - Different nav for users and admin. 
 - User have to login or sign up to purchase proucts.
-- User can see his order details.
-- Admin can manage products (add, update, delete), manage orders, manage users.
+- User can see his order details, increase, decrease or delete products from the cart.
+- Admin can manage products (create, update, delete), manage orders, manage users.
 - Stripe is used to pay the price of the products
 
 
